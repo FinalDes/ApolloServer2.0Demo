@@ -1,5 +1,5 @@
 /* tslint:disable:no-console */
-import { ApolloServer, gql } from "apollo-server";
+import { ApolloServer, gql } from "apollo-server-express";
 import express = require("express");
 
 export const app = express();
