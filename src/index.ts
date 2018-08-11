@@ -2,7 +2,7 @@
 import { ApolloServer, gql } from "apollo-server-express";
 import express = require("express");
 
-export const app = express();
+const app = express();
 
 const typeDefs = gql`
   type Query{
@@ -18,10 +18,10 @@ const resolvers = {
   },
 };
 
-const server = new ApolloServer({ typeDefs, resolvers });
-server.applyMiddleware({ app });
+const apolloServer = new ApolloServer({ typeDefs, resolvers });
+apolloServer.applyMiddleware({ app });
 
-app.listen({ port: 4000 }, () => {
+export const server = app.listen({ port: 4000 }, () => {
   console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
 });
 // server.listen().then(({ url }) => {

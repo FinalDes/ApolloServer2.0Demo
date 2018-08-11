@@ -1,13 +1,17 @@
 /* tslint:disable:no-console*/
 /* tslint:disable:no-unused-expression*/
 import request = require("supertest");
-import {app} from "./../src/index";
+import {server} from "./../src/index";
 
 const result: {data: {hi: string; }; } = {data: {hi: "hi"}};
 
 describe("Graphql test", () => {
+  afterAll(() => {
+    server.close();
+  });
+
   it("Get Hi, content-type application/json", (done: jest.DoneCallback) => {
-    request(app)
+    request(server)
       .post("/graphql")
       .set("Content-Type", "application/json; charset=UTF-8")
       .send({query: "{hi}"})
@@ -20,7 +24,7 @@ describe("Graphql test", () => {
     });
   });
   xit("Get Hi, content-type application/graphql", (done: jest.DoneCallback) => {
-    request(app)
+    request(server)
       .post("/graphql")
       .set("Content-Type", "application/graphql; charset=UTF-8")
       .send("{hi}")
